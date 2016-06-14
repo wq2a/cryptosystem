@@ -31,9 +31,9 @@ def prime_test(n, k = 64):
         return True
 
 def generate_prime(length):
-    prime = random.randint(10**(length),10**(length+1))
+    prime = random.randint(2**(length),2**(length+1))
     while not prime_test(prime,64):
-        prime = random.randint(10**(length),10**(length+1))
+        prime = random.randint(2**(length),2**(length+1))
     return prime
 
 # Euclidean algorithm
@@ -66,6 +66,15 @@ def modular_multiplicative_inverse(a,n):
         t += n
     return t 
 
+# encryption 
+def encrypt(plaintext,key,block_size):
+    plaintext_num = ''
+    for c in plaintext:
+        plaintext_num += ord(c)
+    #return plaintext_num
+    # code here 
+
+
 def main():
     if len(sys.argv) < 2:
         print 'Need the length of key'
@@ -80,16 +89,24 @@ def main():
     while gcd(t,e) != 1:
         e = random.randint(1,t)
 
-    #print e
     d = modular_multiplicative_inverse(e,t)
-    pub = open('pub.pem','w')
+    #mod = open('MOD','w')
+    #mod.write(str(n))
+    #mod.close()
+    puk = open('rsa/PUK','w')
+    puk.write(str(e)+'\n')
+    puk.write(str(n))
+    puk.close()
+    prk = open('rsa/PRK','w')
+    prk.write(str(d)+'\n')
+    prk.write(str(n))
+    prk.close()
     # pub.write('----BEGIN RSA PUBLIC KEY----\n')
-    pub.write(base64.b64encode(str(n)+str(e))+'\n')
+    # pub.write(base64.b64encode(str(n)+str(e))+'\n')
     # pub.write('----END RSA PUBLIC KEY----')
-    pri = open('pri.pem','w')
+    # pri = open('pri.pem','w')
     # pri.write('----BEGIN RSA PRIVATE KEY----\n')
-    pri.write(base64.b64encode(str(n)+str(d))+'\n')
+    # pri.write(base64.b64encode(str(n)+str(d))+'\n')
     # pri.write('----END RSA PRIVATE KEY----')
-    print d
 
 main()
