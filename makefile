@@ -2,7 +2,7 @@ all:	p1
 
 p1:
 	# 1024 is the size of key
-	python rsa/rsa.py 1024
+	python rsa/rsa.py 16
 
 p2:
 	python symmetric/symmetric.py

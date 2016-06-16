@@ -11,7 +11,8 @@ In this project, first of all, I generate two random numbers which differ in the
 ```
 make p1
 ```
-
+If want to change the key size to 16, open the makefile and change 'python rsa/rsa.py 1024' to 'python rsa/rsa.py 16'
+The key pairs will be in rsa directory, first line is e or d and the second line is n.
 ## Project 2 
 Encryption/Decryption using Polyalphabetic Ciphers
 
