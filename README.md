@@ -12,4 +12,22 @@ In this project, first of all, I generate two random numbers which differ in the
 make p1
 ```
 
-## Project 2 Stage 1 in ### make p2
+## Project 2 
+Encryption/Decryption using Polyalphabetic Ciphers
+
+### Use following command
+```
+make p2
+```
+Choose
+#### 1 to Encrypt
+It will encrypt symmetric/plaintext.txt to symmetric/ciphertext.txt.
+
+#### 2 to Decrypt
+It will decrypt symmetric/ciphertext.txt to symmetric/decrypttext.txt.
+
+## Other commands
+```
+make cleanp1
+make cleanp2
+```
