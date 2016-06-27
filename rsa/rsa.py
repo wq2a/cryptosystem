@@ -43,7 +43,7 @@ def gcd(a, b):
         b = a%b
         a = t
     return a
-
+# find d that (ed mod totient) = 1
 def modular_multiplicative_inverse(a,n):
     t, nt = 0, 1
     r = n
@@ -66,14 +66,64 @@ def modular_multiplicative_inverse(a,n):
         t += n
     return t 
 
-# encryption 
-def encrypt(plaintext,key,block_size):
-    plaintext_num = ''
-    for c in plaintext:
-        plaintext_num += ord(c)
-    #return plaintext_num
-    # code here 
+# break down x (the exponent) into power of 2
+def int2BaseTwo(x):
+    bitInverse = []
+    while x != 0:
+        bitInverse.append(x & 1)
+        x >>= 1
+    return bitInverse
 
+# Modular Exponentiation
+def modular_exponentiation(m,d,n):
+    base2D = int2BaseTwo(d)
+    length = len(base2D)
+    modArr = []
+    result = 1
+    for i in range(1, length+1):
+        if i == 1:
+            modArr.append(m % n)
+        else:
+            modArr.append((modArr[i-2]**2)%n)
+    for i in range(0, length):
+        if base2D[i] == 1:
+            result *= base2D[i]*modArr[i]
+    return result % n
+
+# encryption key[0] is d, key[1] is n
+def encrypt(key):
+    cipher_dic = {}
+    ciphertext = []
+    plaintext = open('rsa/plaintext.txt','r')
+    for line in plaintext:
+        for c in line:
+            c_ascii = ord(c)
+            c_cipher = 0
+            if c_ascii in cipher_dic.keys():
+                c_cipher = cipher_dic[c_ascii]
+            else:
+                c_cipher = modular_exponentiation(c_ascii,key[0],key[1])
+                cipher_dic[c_ascii] = c_cipher
+            ciphertext.append(c_cipher)
+    ct = open('rsa/ciphertext.txt','w')
+    for i in ciphertext:
+        ct.write(str(i)+'\n')
+    ct.close()
+
+# decryption key[0] is e, key[1] is n
+def decrypt(key):
+    decrypt_dic = {}
+    decrypttext = ''
+    ciphertext = open('rsa/ciphertext.txt','r')
+    for c_cipher in ciphertext:
+        c_decrypt = ''
+        if c_cipher in decrypt_dic.keys():
+            c_decrypt = decrypt_dic[c_cipher]
+        else:
+            c_decrypt = modular_exponentiation(int(c_cipher),key[0],key[1])
+            decrypt_dic[c_cipher] = c_decrypt
+        decrypttext += chr(c_decrypt)
+    print decrypttext
 
 def main():
     if len(sys.argv) < 2:
@@ -101,6 +151,16 @@ def main():
     prk.write(str(d)+'\n')
     prk.write(str(n))
     prk.close()
+
+    key = [d,n]
+    
+    encrypt(key)
+    key = [e,n]
+    decrypt(key)
+    # print int2BaseTwo(127)
+    # cc = modular_exponentiation(127,d,n)
+    # print cc
+    # print modular_exponentiation(cc,e,n)
     # pub.write('----BEGIN RSA PUBLIC KEY----\n')
     # pub.write(base64.b64encode(str(n)+str(e))+'\n')
     # pub.write('----END RSA PUBLIC KEY----')
