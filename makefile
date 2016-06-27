@@ -15,6 +15,6 @@ cleanp1:
 	rm rsa/PRK rsa/PUK
 
 cleanp2:
-	rm symmetric/ciphertext.txt symmetric/decrypttext.txt
+	rm symmetric/ciphertext.txt symmetric/decrypttext.txt symmetric/rail_ciphertext.txt symmetric/rail_decrypttext.txt
 
 .PHONY: all p1 p2 clean

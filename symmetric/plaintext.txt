@@ -1,1 +1,1 @@
-Hello World! This is an example of symmetric encryption and decryption by using polyalphabetic ciphers.OK
+Hello World! This is an example of symmetric encryption and decryption by using polyalphabetic or rail fence ciphers.OK
