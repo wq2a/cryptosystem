@@ -27,7 +27,7 @@ Choose
 It will encrypt the message with server's private key and send the cipher to client. The client then decrypts the cipher by using server's public key.
 
 #### 2 to send message from client
-It will encrypt the message with server's public key and send the cipher to server. The server then decrypts the cipher by using its public key.
+It will encrypt the message with server's public key and send the cipher to server. The server then decrypts the cipher by using server's private key.
 
 ## Project 2 
 Encryption/Decryption using Polyalphabetic Ciphers & Rail Fence
