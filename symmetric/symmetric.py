@@ -117,7 +117,7 @@ def rail_decrypt():
     print '--- Decrpt text in decrypttext.txt ---'
 
 def main():
-    print 'This is Encryption/Decryption using Polyalphabetic Ciphers'
+    print 'This is Encryption/Decryption using Polyalphabetic Ciphers & Rail Fence'
     print 'Ciphertext is in ciphertext.txt and Plaintext is in plaintext.txt.'
     
     command = input('Choose: \
